@@ -9,8 +9,8 @@ export default function WithdrawForm({ createWithdraw, accountBalance }) {
         Your withdrawal ammount:
         <input
           type="number"
-          id="deposit-amount"
-          name="deposit-amount"
+          id="withdraw-amount"
+          name="withdraw-amount"
           className="px-4 py-2 ml-2 rounded-md shadow-sm"
           aria-required="true"
           min="0"
