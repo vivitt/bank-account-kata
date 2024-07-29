@@ -9,26 +9,28 @@ export function createAccountBalance(movements: Movement[]) {
 
 export function createAccountBalanceAfterMovement(
   type: "add" | "substract",
-  ammount: number,
+  amount: number,
   prevAccountBalance: number
 ) {
   if (type === "add") {
-    return Number(prevAccountBalance) + Number(ammount);
+    return Number(prevAccountBalance) + Number(amount);
   }
-  return Number(prevAccountBalance) - Number(ammount);
+  return Number(prevAccountBalance) - Number(amount);
 }
 
 export function createAddMovement(
-  ammount: number,
-  prevAccountBalance: number
+  amount: number,
+  prevAccountBalance: number,
+  type: string
 ) {
   const newDeposit = {
     date: new Date().toString(),
-    ammount: ammount,
+    amount: amount,
     type: "add",
+    movementType: type,
     accountBalance: createAccountBalanceAfterMovement(
       "add",
-      ammount,
+      amount,
       prevAccountBalance
     ),
   };
@@ -36,16 +38,18 @@ export function createAddMovement(
 }
 
 export function createSubstractMovement(
-  ammount: number,
-  prevAccountBalance: number
+  amount: number,
+  prevAccountBalance: number,
+  type: string
 ) {
   const newDeposit = {
     date: new Date().toString(),
-    ammount: ammount,
+    amount: amount,
     type: "substract",
+    movementType: type,
     accountBalance: createAccountBalanceAfterMovement(
       "substract",
-      ammount,
+      amount,
       prevAccountBalance
     ),
   };
@@ -61,3 +65,33 @@ export function validateIban(iban: string) {
   return false;
 }
 
+export function filterMovements(
+  movements: Movement[],
+  from: string,
+  to: string,
+  type: string
+) {
+  let filtered = movements.filter((movement) => {
+    if (from === "" && to === "" && type === "") {
+      return movement;
+    } else {
+      if (from === "" || to === "") {
+        return movement.movementType === type;
+      } else {
+        if (type === "") {
+          return (
+            new Date(movement.date) >= new Date(from) &&
+            new Date(movement.date) <= new Date(to)
+          );
+        } else {
+          return (
+            new Date(movement.date) >= new Date(from) &&
+            new Date(movement.date) <= new Date(to) &&
+            movement.movementType === type
+          );
+        }
+      }
+    }
+  });
+  return filtered;
+}

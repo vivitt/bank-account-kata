@@ -20,7 +20,7 @@ export default function DepositForm({ createDeposit, accountBalance }) {
         />
       </label>
       <button
-        className="col-span-1 flex align-center justify-center rounded-lg bg-indigo-200 p-4 my-2 uppercase hover:bg-indigo-400"
+        className="col-span-1 flex align-center items-center justify-center rounded-lg bg-indigo-200 p-4 my-2 uppercase hover:bg-indigo-400"
         onClick={() => {
           createDeposit(value, accountBalance);
           setValue('0');

@@ -59,8 +59,8 @@ export default function MovementsGrid({
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                       {movement.type === "add"
-                        ? `+ ${movement.ammount}`
-                        : `- ${movement.ammount}`}
+                        ? `+ ${movement.amount}`
+                        : `- ${movement.amount}`}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                       {movement.accountBalance}
@@ -83,8 +83,8 @@ export default function MovementsGrid({
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                       {movement.type === "add"
-                        ? `+ ${movement.ammount}`
-                        : `- ${movement.ammount}`}
+                        ? `+ ${movement.amount}`
+                        : `- ${movement.amount}`}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
                       {movement.accountBalance}

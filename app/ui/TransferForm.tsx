@@ -48,7 +48,7 @@ export default function TransferForm({ makeTransfer, accountBalance }) {
         }}
         disabled={!validateIban(iban) || ammount === '0'}
       >
-        Withdraw
+        Make transfer
       </button>
     </div>
   );

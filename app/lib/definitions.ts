@@ -1,6 +1,7 @@
 export type Movement = {
   date: string;
-  ammount: number;
+  amount: number;
   type: string;
+  movementType: string;
   accountBalance: number;
 };
