@@ -10,16 +10,6 @@ export default function MovementsGrid({
 }) {
   const [sortDirectionDescending, setSortDirectionDescending] = useState(true);
 
-  const [sortedMovements, setSortedMovements] = useState(
-    sortDirectionDescending
-      ? movements.sort((a, b) => {
-          return new Date(b.date) - new Date(a.date);
-        })
-      : movements.sort((a, b) => {
-          return new Date(a.date) - new Date(b.date);
-        })
-  );
-
   const onClickSortButton = () => {
     setSortDirectionDescending(!sortDirectionDescending);
   };
@@ -53,28 +43,55 @@ export default function MovementsGrid({
         </tr>
       </thead>
       <tbody>
-        {sortedMovements.map((movement) => {
-          return (
-            <tr
-              key={new Date(movement.date).getTime()}
-              className="bg-white odd:bg-indigo-50 hover:bg-indigo-100"
-            >
-              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
-                {formatDate(movement.date)}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                {movement.type === "add"
-                  ? `+ ${movement.ammount}`
-                  : `- ${movement.ammount}`}
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                {movement.type === "add"
-                  ? movement.prevAccountBalance + movement.ammount
-                  : movement.prevAccountBalance - movement.ammount}
-              </td>
-            </tr>
-          );
-        })}
+        {sortDirectionDescending
+          ? movements
+              .sort((a, b) => {
+                return new Date(b.date) - new Date(a.date);
+              })
+              .map((movement) => {
+                return (
+                  <tr
+                    key={new Date(movement.date).getTime()}
+                    className="bg-white odd:bg-indigo-50 hover:bg-indigo-100"
+                  >
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
+                      {formatDate(movement.date)}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                      {movement.type === "add"
+                        ? `+ ${movement.ammount}`
+                        : `- ${movement.ammount}`}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                      {movement.accountBalance}
+                    </td>
+                  </tr>
+                );
+              })
+          : movements
+              .sort((a, b) => {
+                return new Date(a.date) - new Date(b.date);
+              })
+              .map((movement) => {
+                return (
+                  <tr
+                    key={new Date(movement.date).getTime()}
+                    className="bg-white odd:bg-indigo-50 hover:bg-indigo-100"
+                  >
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
+                      {formatDate(movement.date)}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                      {movement.type === "add"
+                        ? `+ ${movement.ammount}`
+                        : `- ${movement.ammount}`}
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                      {movement.accountBalance}
+                    </td>
+                  </tr>
+                );
+              })}
       </tbody>
     </table>
   );

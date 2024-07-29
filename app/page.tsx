@@ -5,23 +5,43 @@ import MovementsGrid from "./ui/MovementsGrid";
 import ActionPanelGroup from "./ui/ActionsPanelGroup";
 import ActionPanel from "./ui/ActionPanel";
 import SectionLabel from "./ui/SectionLabel";
+import DepositForm from "./ui/DepositForm";
+import { createAccountBalance, createDepositMovement } from "./lib/accountActions";
 
 export default function Page() {
   const [userMovements, setUserMovements] = useState(movements);
-  const [accountBalance, setAccountBalance] = useState(0);
+  const [accountBalance, setAccountBalance] = useState(createAccountBalance(userMovements))
+
+  const createDeposit = (ammount: number, accountBalance: number) => {
+   
+    const newDeposit = createDepositMovement(ammount, accountBalance)
+
+    setUserMovements(
+      [...userMovements, newDeposit]
+    );
+    
+    setAccountBalance(newDeposit.accountBalance) 
+ 
+  };
+
   return (
     <main className="flex flex-col w-3/5 mx-auto my-6">
       <h1 className=" text-3xl font-bold p-4 my-2 justify-center rounded-lg border border-indigo-400">
         Account Balance
       </h1>
       <section>
-        <SectionLabel title="Manage Your Account"> </SectionLabel>
+      <SectionLabel>Manage Your Account</SectionLabel>
         <ActionPanelGroup
           panels={[
             {
               id: "deposit",
               header: "Deposit",
-              content: <p>deposit ui here</p>,
+              content: (
+                <DepositForm
+                  createDeposit={createDeposit}
+                  accountBalance={accountBalance}
+                />
+              ),
             },
             {
               id: "withdraw",
@@ -45,10 +65,9 @@ export default function Page() {
         ></ActionPanelGroup>
       </section>
       <section>
-        <SectionLabel title="Your Latest Movements"> </SectionLabel>
+        <SectionLabel>Your Latest Movements </SectionLabel>
         <MovementsGrid
           movements={userMovements}
-          balance={accountBalance}
         ></MovementsGrid>
       </section>
     </main>
