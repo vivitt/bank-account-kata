@@ -21,6 +21,7 @@ export default function TransferForm({ makeTransfer, accountBalance }) {
           }}
           value={iban}
         />
+        <span className="text-xs pt-2 text-slate-400" aria-label="A valid IBAN include two letters followed by 22 numbers">A valid IBAN example: ES00 0000 0000 0000 0000 0000</span>
       </label>
       <label className="col-span-2 py-2  mr-2 px-3 mb-2 flex flex-col items-start justify-start border border-indigo-400  text-sm font-medium rounded ">
         Your transfer ammount
