@@ -1,14 +1,10 @@
-type Props = {
-  movements: {
-    date: string;
-    ammount: number;
-    type: "add" | "substract";
-    prevAccountBalance: number;
-  }[];
-  balance: number;
-};
+import { Movement } from "../lib/definitions";
 
-export default function MovementsGrid({ movements }: Props) {
+export default function MovementsGrid({
+    movements,
+  }: {
+    movements: Movement[];
+  }) {
   return (
     <table className="min-w-full bg-white border border-gray-200 shadow-md rounded-lg">
       <thead className="bg-gray-100">
