@@ -1,6 +1,6 @@
 export type Movement = {
   date: string;
-  amount: number;
+  ammount: number;
   type: "add" | "substract";
   prevAccountBalance: number;
 };

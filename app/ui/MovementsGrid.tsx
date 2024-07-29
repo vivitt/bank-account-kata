@@ -1,4 +1,5 @@
 import { Movement } from "../lib/definitions";
+import { formatDate } from "../lib/formatDate";
 
 export default function MovementsGrid({
     movements,
@@ -7,7 +8,7 @@ export default function MovementsGrid({
   }) {
   return (
     <table className="min-w-full bg-white border border-gray-200 shadow-md rounded-lg">
-      <thead className="bg-gray-100">
+      <thead className="bg-gray-200">
         <tr>
           <th
             scope="col"
@@ -38,10 +39,10 @@ export default function MovementsGrid({
             return (
               <tr
                 key={new Date(movement.date).getTime()}
-                className="bg-white border-b hover:bg-gray-50"
+                className="bg-white odd:bg-gray-50 border-b hover:bg-gray-100"
               >
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                  {movement.date}
+                  {formatDate(movement.date)}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   {movement.type === "add"
