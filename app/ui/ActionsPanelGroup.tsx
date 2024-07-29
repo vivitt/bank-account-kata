@@ -21,17 +21,17 @@ export default function ActionPanelGroup(props: PropsWithpanelren<Props>) {
   }, []);
 
   return (
-    <div className="min-w-full ">
+    <div className="min-w-full h-64">
       <div
         role="toolbar"
         aria-label="Account management options"
-        className="flex bg-indigo-50 align-center justify-between "
+        className="flex bg-indigo-50 align-center justify-evenly"
       >
         {props.panels.map((panel) => (
           <div key={`${panel.id}-panel`}>
             <button
               onClick={(e) => handleClick(e)}
-              className="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider aria-pressed:text-slate-800 aria-pressed:border aria-pressed:border-indigo-200 "
+              className="px-3 py-3 rounded text-left text-xs font-medium text-gray-400 uppercase tracking-wider aria-pressed:text-slate-800 aria-pressed:border aria-pressed:border-indigo-200 min-h-full"
               key={`${panel.id}-button`}
               aria-pressed={currentPanel === panel.header}
             >

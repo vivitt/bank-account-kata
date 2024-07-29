@@ -6,7 +6,8 @@ import ActionPanelGroup from "./ui/ActionsPanelGroup";
 import ActionPanel from "./ui/ActionPanel";
 import SectionLabel from "./ui/SectionLabel";
 import DepositForm from "./ui/DepositForm";
-import { createAccountBalance, createDepositMovement } from "./lib/accountActions";
+import { createAccountBalance, createDepositMovement, createWithdrawMovement } from "./lib/accountActions";
+import WithdrawForm from "./ui/WithdrawForm";
 
 export default function Page() {
   const [userMovements, setUserMovements] = useState(movements);
@@ -21,6 +22,18 @@ export default function Page() {
     );
     
     setAccountBalance(newDeposit.accountBalance) 
+ 
+  };
+
+  const createWithdraw = (ammount: number, accountBalance: number) => {
+   
+    const newWithdraw = createWithdrawMovement(ammount, accountBalance)
+
+    setUserMovements(
+      [...userMovements, newWithdraw]
+    );
+    
+    setAccountBalance(newWithdraw.accountBalance) 
  
   };
 
@@ -40,13 +53,13 @@ export default function Page() {
                 <DepositForm
                   createDeposit={createDeposit}
                   accountBalance={accountBalance}
-                />
+                ></DepositForm>
               ),
             },
             {
               id: "withdraw",
               header: "Withdraw",
-              content: <p>withdraw ui here</p>,
+              content: <WithdrawForm createWithdraw={createWithdraw} accountBalance={accountBalance} ></WithdrawForm>
             },
             {
               id: "transfer",
@@ -55,7 +68,7 @@ export default function Page() {
             },
             {
               id: "search",
-              header: "Search Movements",
+              header: "Search",
               content: <p>search ui here</p>,
             },
           ]}

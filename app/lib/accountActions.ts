@@ -25,3 +25,12 @@ export function createDepositMovement(ammount: number, prevAccountBalance: numbe
   return newDeposit;
 }
 
+export function createWithdrawMovement(ammount: number, prevAccountBalance: number) {
+  const newDeposit = {
+    date: new Date().toString(),
+    ammount: ammount,
+    type: 'substract',
+    accountBalance: createAccountBalanceAfterMovement('substract', ammount, prevAccountBalance),
+  };
+  return newDeposit;
+}
