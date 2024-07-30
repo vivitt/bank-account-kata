@@ -3,7 +3,7 @@
 Back account kata is a solution for a technical challenge for a frontend job position.
 It is bank account browser application that presents a UI where users can intereact with their account movements and create new ones.
 
-🔗 [View the deployed project](bank-account-kata-jvlwdkunw-vivitts-projects.vercel.app)
+🔗 [View the deployed project](https://bank-account-kata-git-main-vivitts-projects.vercel.app/)
 
 <div align='center'>
 <img src='./public/Screen Shot 2024-07-29 at 22.07.34.png' alt='App view screenshot' width='600'/>
