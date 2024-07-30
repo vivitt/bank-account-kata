@@ -39,7 +39,7 @@ export default function MovementsGrid({
           <tr className="border-none">
             <th
               scope="col"
-              className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase "
+              className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase flex items-center"
             >
               Date{" "}
               <SortButton

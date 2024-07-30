@@ -17,14 +17,10 @@ import WithdrawForm from "./ui/WithdrawForm";
 import TransferForm from "./ui/TransferForm";
 import SearchForm from "./ui/SearchForm";
 
-
 export default function Page() {
- 
-
   const [userMovements, setUserMovements] = useState(movements);
   const [filteredUserMovements, setfilteredUserMovements] =
     useState(userMovements);
-
 
   const [accountBalance, setAccountBalance] = useState(
     createAccountBalance(userMovements)
@@ -66,7 +62,6 @@ export default function Page() {
     setfilteredUserMovements(filterMovements(userMovements, from, to, type));
   };
 
-
   return (
     <main className="flex flex-col w-3/5 mx-auto my-6">
       <h1 className=" text-3xl font-bold p-4 my-2 justify-center rounded-lg border border-indigo-400">
@@ -103,8 +98,7 @@ export default function Page() {
                 <TransferForm
                   makeTransfer={makeTransfer}
                   accountBalance={accountBalance}
-                >
-                </TransferForm>
+                ></TransferForm>
               ),
             },
             {
@@ -122,11 +116,7 @@ export default function Page() {
       </section>
       <section>
         <SectionLabel>Your Latest Movements </SectionLabel>
-        <MovementsGrid
-          movements={filteredUserMovements}
-        ></MovementsGrid>
-        <span>{movements.length}</span>
-       
+        <MovementsGrid movements={filteredUserMovements}></MovementsGrid>
       </section>
     </main>
   );
