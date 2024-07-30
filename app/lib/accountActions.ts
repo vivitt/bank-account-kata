@@ -71,7 +71,7 @@ export function filterMovements(
   to: string,
   type: string
 ) {
-  let filtered = movements.filter((movement) => {
+  const filtered = movements.filter((movement) => {
     if (from === "" && to === "" && type === "") {
       return movement;
     } else {

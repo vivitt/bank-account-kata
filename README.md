@@ -72,6 +72,8 @@ To set up this project locally:
 - `npm run dev` to start the server in port 3000
 
 ## Further Improvements
-Currently, the movements are stored in a ts file with placeholder data, and new movements aren't saved. Adding user authentication and a database connection would allow persisting and storing user data. 
-Also, implementing a safer way to validate the IBAN number would be a nice improvement for the app. 
-Finally, there is some code repetition in the component that renders the list of movements that could be improved.
+The first and main improvement I would add to this UI is enhancing accessibility and usability by adding error messages. These messages would inform users of the specific issues when they attempt to submit invalid input values.
+
+Additionally, implementing a more secure method for validating IBAN numbers would further improve the app.
+
+Finally, the movements are currently stored in a `ts` file with placeholder data, and new movements aren't saved. So, adding user authentication and a database connection would be the next step if I were to continue working on this project.

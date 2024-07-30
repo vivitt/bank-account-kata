@@ -15,10 +15,17 @@ import {
 import WithdrawForm from "./ui/WithdrawForm";
 import TransferForm from "./ui/TransferForm";
 import SearchForm from "./ui/SearchForm";
+import Pagination from "./ui/Pagination";
+import { pagination } from "./lib/paginateResults";
 
 export default function Page() {
+ 
+
   const [userMovements, setUserMovements] = useState(movements);
-  const [filteredMovements, setFilteredMovements] = useState(userMovements);
+  const [filteredUserMovements, setfilteredUserMovements] =
+    useState(userMovements);
+
+
   const [accountBalance, setAccountBalance] = useState(
     createAccountBalance(userMovements)
   );
@@ -27,7 +34,7 @@ export default function Page() {
     const newDeposit = createAddMovement(ammount, accountBalance, "deposit");
 
     setUserMovements([...userMovements, newDeposit]);
-    setFilteredMovements([...userMovements, newDeposit]);
+    setfilteredUserMovements([...userMovements, newDeposit]);
     setAccountBalance(newDeposit.accountBalance);
   };
 
@@ -39,7 +46,7 @@ export default function Page() {
     );
 
     setUserMovements([...userMovements, newWithdraw]);
-    setFilteredMovements([...userMovements, newDeposit]);
+    setfilteredUserMovements([...userMovements, newDeposit]);
     setAccountBalance(newWithdraw.accountBalance);
   };
 
@@ -51,13 +58,14 @@ export default function Page() {
     );
 
     setUserMovements([...userMovements, newTransfer]);
-    setFilteredMovements([...userMovements, newDeposit]);
+    setfilteredUserMovements([...userMovements, newDeposit]);
     setAccountBalance(newTransfer.accountBalance);
   };
 
   const searchMovement = (from: string, to: string, type: string) => {
-    setFilteredMovements(filterMovements(userMovements, from, to, type));
+    setfilteredUserMovements(filterMovements(userMovements, from, to, type));
   };
+
 
   return (
     <main className="flex flex-col w-3/5 mx-auto my-6">
@@ -115,7 +123,11 @@ export default function Page() {
       </section>
       <section>
         <SectionLabel>Your Latest Movements </SectionLabel>
-        <MovementsGrid movements={filteredMovements}></MovementsGrid>
+        <MovementsGrid
+          movements={filteredUserMovements}
+        ></MovementsGrid>
+        <span>{movements.length}</span>
+       
       </section>
     </main>
   );

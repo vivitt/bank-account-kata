@@ -1,6 +1,9 @@
 import { Movement } from "../lib/definitions";
 import { formatDate } from "../lib/formatDate";
+import { pagination } from "../lib/paginateResults";
 import SortButton from "./SortButton";
+import Pagination from "./Pagination";
+
 import { useState } from "react";
 
 export default function MovementsGrid({
@@ -8,91 +11,96 @@ export default function MovementsGrid({
 }: {
   movements: Movement[];
 }) {
-  const [sortDirectionDescending, setSortDirectionDescending] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const { totalPages, paginate } = pagination(movements, currentPage);
+  const [sortDirection, setSortDirection] = useState("des");
+
+  const SORTING_DIRECTIONS = {
+    descending: "des",
+    ascending: "asc",
+  };
 
   const onClickSortButton = () => {
-    setSortDirectionDescending(!sortDirectionDescending);
+    if (sortDirection === SORTING_DIRECTIONS.descending) {
+      setSortDirection(SORTING_DIRECTIONS.ascending);
+    } else {
+      setSortDirection(SORTING_DIRECTIONS.descending);
+    }
+  };
+
+  const changePage = (currentPage: number, nextPage: number) => {
+    setCurrentPage(nextPage);
+    console.log(currentPage, nextPage);
   };
 
   return (
-    <table className="table-fixed min-w-full border border-indigo-50 ">
-      <thead className="bg-indigo-200">
-        <tr className="border-none">
-          <th
-            scope="col"
-            className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase "
-          >
-            Date{" "}
-            <SortButton
-              sortDirection={sortDirectionDescending ? "des" : "asc"}
-              onClick={onClickSortButton}
-            ></SortButton>
-          </th>
-          <th
-            scope="col"
-            className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase "
-          >
-            Amount
-          </th>
-          <th
-            scope="col"
-            className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider"
-          >
-            Balance
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {sortDirectionDescending
-          ? movements
-              .sort((a, b) => {
+    <>
+      <table className="table-fixed min-w-full border border-indigo-50 ">
+        <thead className="bg-indigo-200">
+          <tr className="border-none">
+            <th
+              scope="col"
+              className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase "
+            >
+              Date{" "}
+              <SortButton
+                sortDirection={sortDirection}
+                onClick={onClickSortButton}
+              ></SortButton>
+            </th>
+            <th
+              scope="col"
+              className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase "
+            >
+              Amount
+            </th>
+            <th
+              scope="col"
+              className="px-6 py-3 text-left text-xs font-medium text-gray-700 uppercase tracking-wider"
+            >
+              Balance
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {movements
+            .sort((a, b) => {
+              if (sortDirection === SORTING_DIRECTIONS.descending) {
                 return new Date(b.date) - new Date(a.date);
-              })
-              .map((movement) => {
-                return (
-                  <tr
-                    key={new Date(movement.date).getTime()}
-                    className="bg-white odd:bg-indigo-50 hover:bg-indigo-100"
-                  >
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
-                      {formatDate(movement.date)}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                      {movement.type === "add"
-                        ? `+ ${movement.amount}`
-                        : `- ${movement.amount}`}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                      {movement.accountBalance}
-                    </td>
-                  </tr>
-                );
-              })
-          : movements
-              .sort((a, b) => {
+              }
+              if (sortDirection === SORTING_DIRECTIONS.ascending) {
                 return new Date(a.date) - new Date(b.date);
-              })
-              .map((movement) => {
-                return (
-                  <tr
-                    key={new Date(movement.date).getTime()}
-                    className="bg-white odd:bg-indigo-50 hover:bg-indigo-100"
-                  >
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
-                      {formatDate(movement.date)}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                      {movement.type === "add"
-                        ? `+ ${movement.amount}`
-                        : `- ${movement.amount}`}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-                      {movement.accountBalance}
-                    </td>
-                  </tr>
-                );
-              })}
-      </tbody>
-    </table>
+              }
+            }).filter((movement, index ) => {
+              return index >= (currentPage - 1)* 10 && index <= (currentPage * 10);
+            })
+            .map((movement) => {
+              return (
+                <tr
+                  key={new Date(movement.date).getTime()}
+                  className="bg-white odd:bg-indigo-50 hover:bg-indigo-100"
+                >
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
+                    {formatDate(movement.date)}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                    {movement.type === "add"
+                      ? `+ ${movement.amount}`
+                      : `- ${movement.amount}`}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                    {movement.accountBalance}
+                  </td>
+                </tr>
+              );
+            })}
+        </tbody>
+      </table>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        changePage={changePage}
+      ></Pagination>
+    </>
   );
 }

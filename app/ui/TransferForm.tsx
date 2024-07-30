@@ -1,4 +1,4 @@
-import { ReactDOM, ReactElement, ReactNode, useEffect, useState } from "react";
+import { useState } from "react";
 import { validateIban } from "../lib/accountActions";
 
 export default function TransferForm({ makeTransfer, accountBalance }) {
@@ -21,7 +21,12 @@ export default function TransferForm({ makeTransfer, accountBalance }) {
           }}
           value={iban}
         />
-        <span className="text-xs pt-2 text-slate-400" aria-label="A valid IBAN include two letters followed by 22 numbers">A valid IBAN example: ES00 0000 0000 0000 0000 0000</span>
+        <span
+          className="text-xs pt-2 text-slate-400"
+          aria-label="A valid IBAN include two letters followed by 22 numbers"
+        >
+          A valid IBAN example: ES00 0000 0000 0000 0000 0000
+        </span>
       </label>
       <label className="col-span-2 py-2  mr-2 px-3 mb-2 flex flex-col items-start justify-start border border-indigo-400  text-sm font-medium rounded ">
         Your transfer ammount
@@ -36,7 +41,6 @@ export default function TransferForm({ makeTransfer, accountBalance }) {
           onChange={(e) => {
             setAmmount(e.target.value);
           }}
-          
           value={ammount}
         />
       </label>
@@ -44,10 +48,10 @@ export default function TransferForm({ makeTransfer, accountBalance }) {
         className="col-span-1 flex align-center items-center justify-center rounded-lg bg-indigo-200 p-4 my-2 uppercase hover:bg-indigo-400"
         onClick={() => {
           makeTransfer(ammount, accountBalance);
-          setAmmount('0');
-          setIban('');
+          setAmmount("0");
+          setIban("");
         }}
-        disabled={!validateIban(iban) || ammount === '0'}
+        disabled={!validateIban(iban) || ammount === "0"}
       >
         Make transfer
       </button>
