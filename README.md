@@ -28,9 +28,9 @@ I used [Tailwind CSS](https://tailwindcss.com/) for styling and the [@heroicons/
 
 ## Usage and features
 
-The app includes one main view divided in two sections:
+The app includes one main client component view divided in two sections:
 
-### Account actions
+### Manage Account
 
 This section includes a toolbar where users can select the action they want to take. From this section, users can create new deposit, withdraw, or transfer movements, or filter existing movements by date or type.
 
@@ -50,7 +50,7 @@ Making a transfer requires users to enter a valid IBAN number. The validation of
 <img src='./public/Screen Shot 2024-07-29 at 22.07.48.png' alt='Home view screenshot' width='600'/>
 </div>
 
-##### Filter movements
+#### Search movements
 
 Existing movements can be filtered by date by selecting both a starting and ending date. They can also be filtered by type, and both filters can be combined to refine the results.
 
@@ -66,6 +66,9 @@ The UI displays a list of all existing movements, sorted by decreasing date. Thi
 <img src='./public/Screen Shot 2024-07-29 at 22.08.10.png' alt='Home view screenshot' width='600'/>
 </div>
 
+#### Pagination
+The results are paginated, showing up to ten movements per page. Users can navigate through the pages by clicking the arrow buttons at the bottom of the list to go to the first, previous, next, or last page.
+
 ## Project set up
 
 To set up this project locally:
@@ -80,4 +83,4 @@ The first and main improvement I would add to this UI is enhancing accessibility
 
 There is also room for improvement in the flexibility of the layout, making it more adaptable to smaller screens.
 
-Finally, the movements are currently stored in a `ts` file with placeholder data, and new movements aren't saved. So, adding user authentication and a database connection would be the next step if I were to continue working on this project.
+Finally, the movements are currently stored in a `ts` file filled with placeholder data, and new movements aren't saved. A next step could be adding user authentication and implementing a state management tool, such as Context API.
