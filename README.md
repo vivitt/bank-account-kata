@@ -76,7 +76,7 @@ To set up this project locally:
 - clone this repo: `git clone git@github.com:vivitt/bank-account-kata.git`
 - navigate to the api folder `cd bank-account-kata`
 - `npm install` to install dependencies
-- `npm run dev` to start the server in port 3000
+- `npm run dev` to start the development server in [http://localhost:3000/](http://localhost:3000/)
 
 ## Further Improvements
 The first and main improvement I would add to this UI is enhancing accessibility and usability by adding error messages. These messages would inform users of the specific issues when they attempt to submit invalid input values. Also, implementing a more secure method for validating IBAN numbers would further improve the app.
