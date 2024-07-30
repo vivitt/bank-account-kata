@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { ReactNode } from "react";
 import { movements } from "./lib/movements-data";
 import MovementsGrid from "./ui/MovementsGrid";
 import ActionPanelGroup from "./ui/ActionsPanelGroup";
@@ -15,8 +16,7 @@ import {
 import WithdrawForm from "./ui/WithdrawForm";
 import TransferForm from "./ui/TransferForm";
 import SearchForm from "./ui/SearchForm";
-import Pagination from "./ui/Pagination";
-import { pagination } from "./lib/paginateResults";
+
 
 export default function Page() {
  
@@ -46,7 +46,7 @@ export default function Page() {
     );
 
     setUserMovements([...userMovements, newWithdraw]);
-    setfilteredUserMovements([...userMovements, newDeposit]);
+    setfilteredUserMovements([...userMovements, newWithdraw]);
     setAccountBalance(newWithdraw.accountBalance);
   };
 
@@ -58,7 +58,7 @@ export default function Page() {
     );
 
     setUserMovements([...userMovements, newTransfer]);
-    setfilteredUserMovements([...userMovements, newDeposit]);
+    setfilteredUserMovements([...userMovements, newTransfer]);
     setAccountBalance(newTransfer.accountBalance);
   };
 
@@ -104,7 +104,6 @@ export default function Page() {
                   makeTransfer={makeTransfer}
                   accountBalance={accountBalance}
                 >
-                  {" "}
                 </TransferForm>
               ),
             },
@@ -112,7 +111,7 @@ export default function Page() {
               id: "search",
               header: "Search",
               content: (
-                <SearchForm searchMovement={searchMovement}> </SearchForm>
+                <SearchForm searchMovement={searchMovement}></SearchForm>
               ),
             },
           ]}

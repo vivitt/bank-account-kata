@@ -2,7 +2,7 @@ export default function SortButton({
   sortDirection,
   onClick,
 }: {
-  sortDirection: "des" | "asc";
+  sortDirection: string,
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }) {
   return (

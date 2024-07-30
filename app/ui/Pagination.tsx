@@ -8,8 +8,6 @@ import {
 export default function Pagination({ totalPages, currentPage, changePage }) {
   return (
     <div className="flex items-center justify-center m-4">
-          <span> TotalPages: {totalPages}</span>
-          <span> currentPage: {currentPage}</span>
       <button
         aria-label="First page"
         onClick={() => changePage(currentPage, 1)}

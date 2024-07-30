@@ -1,5 +1,4 @@
-import { ReactDOM, ReactElement, ReactNode, useEffect, useState } from "react";
-import { validateIban } from "../lib/accountActions";
+import { useState } from "react";
 
 export default function SearchForm({ searchMovement }) {
   const [fromDate, setFromDate] = useState("");
@@ -59,7 +58,7 @@ export default function SearchForm({ searchMovement }) {
           setFromDate("");
           setToDate("");
           setMovementType("");
-          searchMovement('', '', "");
+          searchMovement("", "", "");
         }}
         disabled={fromDate === "" && toDate === "" && movementType === ""}
       >

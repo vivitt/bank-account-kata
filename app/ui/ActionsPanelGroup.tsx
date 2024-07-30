@@ -1,6 +1,6 @@
 import React from "react";
 import { ReactNode, useEffect, useState } from "react";
-import { PropsWithpanelren } from "react";
+import { PropsWithChildren } from "react";
 
 type Props = {
   panels: { id: string; header: string; content: ReactNode }[];
@@ -8,7 +8,7 @@ type Props = {
   renderPanels: (id: string, content: ReactNode) => React.JSX.Element;
 };
 
-export default function ActionPanelGroup(props: PropsWithpanelren<Props>) {
+export default function ActionPanelGroup(props: PropsWithChildren<Props>) {
   const [currentPanel, setCurrentPanel] = useState("Deposit");
 
   const handleClick = (e: React.UIEvent<HTMLButtonElement>) => {

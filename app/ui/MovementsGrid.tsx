@@ -30,7 +30,6 @@ export default function MovementsGrid({
 
   const changePage = (currentPage: number, nextPage: number) => {
     setCurrentPage(nextPage);
-    console.log(currentPage, nextPage);
   };
 
   return (
@@ -66,10 +65,10 @@ export default function MovementsGrid({
           {movements
             .sort((a, b) => {
               if (sortDirection === SORTING_DIRECTIONS.descending) {
-                return new Date(b.date) - new Date(a.date);
+                return Number(new Date(b.date)) - Number(new Date(a.date));
               }
               if (sortDirection === SORTING_DIRECTIONS.ascending) {
-                return new Date(a.date) - new Date(b.date);
+                return Number(new Date(a.date)) - Number(new Date(b.date));
               }
             }).filter((movement, index ) => {
               return index >= (currentPage - 1)* 10 && index <= (currentPage * 10);

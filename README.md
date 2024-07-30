@@ -3,6 +3,8 @@
 Back account kata is a solution for a technical challenge for a frontend job position.
 It is bank account browser application that presents a UI where users can intereact with their account movements and create new ones.
 
+🔗 [View the deployed project](bank-account-kata-jvlwdkunw-vivitts-projects.vercel.app)
+
 <div align='center'>
 <img src='./public/Screen Shot 2024-07-29 at 22.07.34.png' alt='App view screenshot' width='600'/>
 </div>
@@ -20,7 +22,9 @@ It is bank account browser application that presents a UI where users can intere
 
 ## Project details
 
-This is a Next.js application. I used the Next's app router and Tailwind CSS for styling.
+This project is a [Next.js](https://nextjs.org/) application with [Next's app router](https://nextjs.org/docs/app).
+
+I used [Tailwind CSS](https://tailwindcss.com/) for styling and the [@heroicons/react](https://www.npmjs.com/package/@heroicons/react) package to add icons.
 
 ## Usage and features
 
@@ -72,8 +76,8 @@ To set up this project locally:
 - `npm run dev` to start the server in port 3000
 
 ## Further Improvements
-The first and main improvement I would add to this UI is enhancing accessibility and usability by adding error messages. These messages would inform users of the specific issues when they attempt to submit invalid input values.
+The first and main improvement I would add to this UI is enhancing accessibility and usability by adding error messages. These messages would inform users of the specific issues when they attempt to submit invalid input values. Also, implementing a more secure method for validating IBAN numbers would further improve the app.
 
-Additionally, implementing a more secure method for validating IBAN numbers would further improve the app.
+There is also room for improvement in the flexibility of the layout, making it more adaptable to smaller screens.
 
 Finally, the movements are currently stored in a `ts` file with placeholder data, and new movements aren't saved. So, adding user authentication and a database connection would be the next step if I were to continue working on this project.
